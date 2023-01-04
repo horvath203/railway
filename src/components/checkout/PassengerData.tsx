@@ -6,13 +6,20 @@ import UserInfo from '../../containers/UserInfo';
 import { PassengerInformation } from '../../types';
 
 type Props = {
-  userData: PassengerInformation;
+  userData: PassengerInformation[];
+  userEmail: string;
   setEmail: (email: string) => void;
 };
 
-export const PassengerData = ({ userData, setEmail }: Props) => {
-  const [email, setEm] = useState(userData.email);
-
+export const PassengerData = ({ userData, userEmail, setEmail }: Props) => {
+  const [email, setEm] = useState(userEmail);
+  const newPassInfo = {
+    name: '',
+    surname: '',
+    discount: 'NO DISCOUNT',
+    passengerGroup: '3',
+  };
+  console.log({ userData });
   return (
     <>
       <Sheet
@@ -33,7 +40,10 @@ export const PassengerData = ({ userData, setEmail }: Props) => {
           The name will be directly on your travel document.
         </span>
         <br />
-        <UserInfo passengerInfo={userData} />
+        {userData.map((passenger, idx) => {
+          return <UserInfo passengerInfo={passenger} id={idx} />;
+        })}
+        {/*        onClick={() => dispatch(addPassenger())}*/}
         <Button style={{ padding: '15px 0 0 25px' }} startIcon={<AddIcon />}>
           Add next passenger
         </Button>

@@ -10,19 +10,45 @@ export const userSlice = createSlice({
   reducers: {
     // @ts-ignore
     setName: (state: UserData | null, action) => {
-      return { ...state, name: action.payload };
+      return {
+        ...state,
+        passengerInformation: state?.passengerInformation?.map((u) =>
+          u.id === action.payload.id ? { ...u, name: action.payload.name } : u,
+        ),
+      };
     },
     // @ts-ignore
     setSurname: (state: UserData | null, action) => {
-      return { ...state, surname: action.payload };
+      return {
+        ...state,
+        passengerInformation: state?.passengerInformation?.map((u) =>
+          u.id === action.payload.id
+            ? { ...u, surname: action.payload.surname }
+            : u,
+        ),
+      };
     },
     // @ts-ignore
     setGroupAge: (state: UserData | null, action) => {
-      return { ...state, passengerGroupAge: action.payload };
+      return {
+        ...state,
+        passengerInformation: state?.passengerInformation?.map((u) =>
+          u.id === action.payload.id
+            ? { ...u, passengerGroup: action.payload.groupAge }
+            : u,
+        ),
+      };
     },
     // @ts-ignore
     setDiscount: (state: UserData | null, action) => {
-      return { ...state, discount: action.payload };
+      return {
+        ...state,
+        passengerInformation: state?.passengerInformation?.map((u) =>
+          u.id === action.payload.id
+            ? { ...u, discount: action.payload.discount }
+            : u,
+        ),
+      };
     },
     // @ts-ignore
     setEmail: (state: UserData | null, action) => {
@@ -30,7 +56,14 @@ export const userSlice = createSlice({
     },
     // @ts-ignore
     setRegistrationNumber: (state: UserData | null, action) => {
-      return { ...state, registrationNumber: action.payload };
+      return {
+        ...state,
+        passengerInformation: state?.passengerInformation?.map((u) =>
+          u.id === action.payload.id
+            ? { ...u, registrationNumber: action.payload.number }
+            : u,
+        ),
+      };
     },
   },
 });

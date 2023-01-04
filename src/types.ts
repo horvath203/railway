@@ -25,17 +25,18 @@ export type Stop = {
 export type DiscountType = 'NO DISCOUNT' | 'ISIC card';
 
 export type UserData = {
-  passengerInformation: PassengerInformation;
+  passengerInformation: PassengerInformation[];
   trainTicketSelection: TrainTicketSelection;
   payment: Payment;
+  email: string;
 };
 
 export type PassengerInformation = {
+  id: number;
   name: string;
   surname: string;
   discount: DiscountType;
-  age: number;
-  email: string;
+  passengerGroup: number;
   registrationNumber?: string;
 };
 

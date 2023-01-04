@@ -8,6 +8,13 @@ import AppStore from '../images/app-store.svg';
 import AppGallery from '../images/appgallery-logo-sk.svg';
 import GooglePlay from '../images/google-play.svg';
 import QrCode from '../images/qr-code.svg';
+import {
+  FaFacebook,
+  FaLinkedin,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+} from 'react-icons/fa';
 
 export const Footer = () => {
   return (
@@ -36,11 +43,11 @@ export const Footer = () => {
               <a href="#">Integrated Transportation Systems</a>
             </li>
           </div>
-          <div className="footer-col">
-            <div>
-              <RssFeedIcon className="icons" />
+          <div className="footer-RSS">
+            <li>
+              <RssFeedIcon />
               <a href="#">RSS</a>
-            </div>
+            </li>
           </div>
         </div>
         <hr className="Line"></hr>
@@ -53,34 +60,36 @@ export const Footer = () => {
                 </a>
               </ul>
               <ul>
-                <i className="fa-brands fa-facebook"></i>
-                <a href="#"> Facebook</a>
-              </ul>
-              <ul>
-                <i className="fa-brands fa-linkedin"></i>
-                <a href="#"> Linkedin</a>
-              </ul>
-              <ul>
-                <i className="fa-brands fa-twitter"></i>
-                <a href="#"> Twitter</a>
-              </ul>
-              <ul>
-                <i className="fa-brands fa-instagram"></i>
-                <a href="#"> Instagram</a>
-              </ul>
-              <ul>
-                <i className=""></i>
-                <a href="src/components/Footer#"> Youtube</a>
+                <li>
+                  <FaFacebook />
+                  <a href="#"> Facebook</a>
+                </li>
+                <li>
+                  <FaLinkedin />
+                  <a href="#"> Linkedin</a>
+                </li>
+                <li>
+                  <FaTwitter />
+                  <a href="#"> Twitter</a>
+                </li>
+                <li>
+                  <FaInstagram />
+                  <a href="#"> Instagram</a>
+                </li>
+                <li>
+                  <FaYoutube />
+                  <a href="#"> Youtube</a>
+                </li>
               </ul>
             </div>
           </div>
           <div className="footer-col">
             <ul>
               <h4>Email:</h4>
-              <div className="phone">
+              <li className="phone">
                 <EmailIcon className="icons" width="19" height="19" />
-                <a href="#">info@slovakrail.sk</a>
-              </div>
+                <a href="#">Info@slovakrail.sk</a>
+              </li>
             </ul>
           </div>
           <div className="footer-col">
@@ -110,6 +119,17 @@ export const Footer = () => {
                 <img src={AppGallery} alt="" />
               </div>
             </ul>
+          </div>
+        </div>
+        <hr className="Last_line"></hr>
+        <div>
+          <div className="Authors_info">
+            © The Earths webbest developers 2022
+            <div className="Up_to_start">
+              <a href="#" title="hore">
+                Up
+              </a>
+            </div>
           </div>
         </div>
       </footer>

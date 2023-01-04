@@ -12,21 +12,99 @@
   background: #0773d7;
 }
 
+.HeaderMainPage {
+  display: flex;
+  height: 55px;
+  padding: 10px 1% 10px 1%;
+  justify-content: space-between;
+  text-align: center;
+  background: #0773d7;
+}
+
+.MenuBar {
+  width: 120%;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}
+
+.MenuBar ul {
+  display: inline-flex;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  color: #ffffff;
+}
+
+.MenuBar ul li {
+  padding: 10px 15px 15px;
+  font-size: 18px;
+}
+
+.MenuBar ul li:hover {
+  background-color: #002664;
+  border-radius: 2px;
+}
+
+.MenuBar ul li:focus-within .SubMenu-1 {
+  display: block;
+  position: absolute;
+  background-color: #0773d7;
+}
+
+.MenuButton {
+  background-color: #0773d7;
+}
+
+.MenuBar ul li:focus-within .SubMenu-1 ul {
+  display: block;
+  padding: 20px;
+}
+
+.SubMenu-1 {
+  display: none;
+  z-index: 1;
+  top: 70px;
+}
+
+.SubMenu-1 li::before a {
+  content: '\1F892';
+  align-self: flex-start;
+  padding-right: 1%;
+  display: inline-block;
+}
+
+.SubMenu-1 li {
+  text-align: left;
+  border: #002664;
+}
+
+.MenuList {
+  padding: 0px;
+  font-size: 18px;
+}
+
+.MenuList li a {
+  border: #002664;
+}
+
 .Margin-div {
   width: 100%;
   height: 45px;
 }
 
-.SummaryInChechkout {
+.SummaryInCheckout {
   border: 1px solid #002664;
   padding: 10px;
   line-height: 29px;
   position: fixed;
 }
+
 .FavoriteRoadButton {
   border: 1px solid #002664;
   background-color: #ffffff;
 }
+
 .SignButton {
   color: #ffffff;
   background: #002664;
@@ -116,6 +194,8 @@
 footer h4 {
   color: #ffffff;
   display: flex;
+  font-size: 20px;
+  line-height: 29px;
 }
 
 a {
@@ -127,14 +207,14 @@ footer li {
   list-style: none;
   font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 29px;
+  font-size: 18px;
+  line-height: 200%;
   display: flex;
   align-items: center;
   color: #ffffff;
 }
 
-footer li::before {
+.upper_container .footer-col li::before {
   content: '\1F892';
   width: 20px;
   height: 20px;
@@ -147,11 +227,15 @@ footer li::before {
   margin-right: 2%;
 }
 
+.footer-RSS li {
+  float: left;
+  margin-left: 200%;
+  margin-right: 2%;
+}
+
 .upper_container {
   height: 25%;
-  margin: 5%;
-  margin-top: 2%;
-  margin-bottom: 3%;
+  margin: 2% 5% 3%;
   display: flex;
   align-items: center;
 }
@@ -161,6 +245,13 @@ footer li::before {
   margin-top: auto;
   margin-left: 7%;
   display: flex;
+}
+
+.Authors_info {
+  height: 25%;
+  margin-top: auto;
+  margin-left: 7%;
+  color: #ffffff;
 }
 
 footer {
@@ -196,9 +287,38 @@ footer .icons {
   background-color: white;
 }
 
+.Last_line {
+  width: 86%;
+  height: 1px;
+  border: 0 none;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+}
+
+.Up_to_start {
+  float: right !important;
+  margin-right: 8%;
+  z-index: 9;
+}
+
+.Up_to_start:hover {
+  text-decoration: underline;
+}
+
 .Socialmedia {
   list-style: none;
   color: #ffffff;
+}
+
+.Socialmedia li a {
+  font-size: 18px;
+  margin-left: 5%;
+}
+
+.phone a {
+  font-size: 18px;
+  margin-left: 1px;
 }
 
 .img-logo {
@@ -218,6 +338,7 @@ footer .icons {
 .AlignSecondButton button:nth-child(2) {
   margin-left: auto;
 }
+
 .AlignSecondButton {
   display: flex;
   margin-top: 30px;
@@ -233,19 +354,18 @@ footer .icons {
   border: 1px solid #002664;
 }
 
-.ContentConainer {
+.ContentContainer {
   border: 1px solid #002664;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin: 5%;
   padding-top: 2%;
   padding-bottom: 2%;
   padding-left: 2%;
 }
-.ContentConainer:last-child {
+
+.ContentContainer:last-child {
   background-color: rgb(232, 232, 232);
 }
+
 .AdjustData {
   border: 1px solid #002664;
 }
@@ -253,14 +373,28 @@ footer .icons {
 .ButtonToEdit {
   float: right;
 }
+
 .ContentOfSummary {
   color: #002664;
   padding-right: 2%;
   margin-top: 10px;
 }
+
 .ContentOfSummary:first-child {
   margin-bottom: 2%;
 }
+
 .BackButton {
   margin-top: 5%;
+}
+
+.InformationCardContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 40px;
+}
+
+.InformationCardContainer .css-1xkonbu-MuiPaper-root-MuiCard-root {
+  color: #002664;
 }
