@@ -2,23 +2,25 @@ import { Button } from '@mui/material';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { TrainCard } from './TrainCard';
-import { TrainInfo } from '../types';
+import { ConInfo, TrainInfo } from '../types';
 import { useNavigate } from 'react-router-dom';
 import { SmallSearchBar } from './SmallSearchBar';
 
 type Props = {
+  dispatch: React.Dispatch<React.SetStateAction<ConInfo>>;
+  connection: ConInfo;
   trains: TrainInfo[];
   setChosenTrain: (train: TrainInfo) => void;
 };
 
-export const TrainConnections = ({ trains, setChosenTrain }: Props) => {
+export const TrainConnections = ({ dispatch, connection, trains, setChosenTrain }: Props) => {
   const navigate = useNavigate();
   const navigateToCheckout = () => {
     navigate('/checkout');
   };
   return (
     <>
-      <SmallSearchBar/>
+      <SmallSearchBar dispatch={dispatch} connection={connection}/>
       <div className="TrainConnectionsContainer">
         <span className="DayStyle">
           <h1>Connection search</h1>

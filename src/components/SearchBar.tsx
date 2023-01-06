@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import RouteOutlinedIcon from '@mui/icons-material/RouteOutlined';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import * as toArray from 'dayjs/plugin/toArray';
 import { useNavigate } from 'react-router-dom';
 import { Autocomplete, Button, Grid, Stack, TextField } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers';
@@ -13,6 +14,7 @@ import cities from '../mock-data/cities.json';
 import { RootState } from '../store/store';
 import { setSearchInfo } from '../store/searchInfoReducer';
 import { useSelector, useDispatch } from 'react-redux';
+import { connect } from 'http2';
 
 const favouriteRoute1 = {
   departureTime: '12:13',
@@ -30,23 +32,22 @@ const favouriteRoute2 = {
 
 type SearchBarProps = {
   dispatch: React.Dispatch<React.SetStateAction<ConInfo>>;
-  from: string;
-  to: string;
-  setFrom: (from: string) => void;
-  setTo: (to: string) => void;
+  connection: ConInfo;
 };
 
 export const SearchBar = ({
-  //dispatch,
-  from,
-  to,
-  setFrom,
-  setTo,
+  dispatch,
+  connection,
 }: SearchBarProps) => {
-  const [date, setDate] = React.useState<Dayjs | null>(dayjs(new Date()));
-
-  const handleChange = (newDate: Dayjs | null) => {
-    setDate(newDate);
+  const changeDate = (newDate: Dayjs | null) => {
+    if(newDate != null){
+    const data = newDate.toDate();
+      dispatch({
+        ...connection,
+        date: data,
+      });
+    }
+    console.log("date change: ", newDate?.toDate(), connection)
   };
 
   const navigate = useNavigate();
@@ -54,41 +55,20 @@ export const SearchBar = ({
     navigate('/connections');
   };
 
-  // const DefVals = () => {
-  //   const curD = new Date();
-  //   const defVal: ConInfo = {
-  //     from: '',
-  //     to: '',
-  //     day: curD.getDate(),
-  //     month: curD.getMonth() + 1,
-  //     hour: curD.getHours(),
-  //     minute: curD.getMinutes(),
-  //   };
-  //   return defVal;
-  // };
-  const formVals = useSelector((state: RootState) => state.searchInfo);
+  //const formVals = useSelector((state: RootState) => state.searchInfo);
+  //const reduxDispatch = useDispatch();
   const {
     register,
     handleSubmit,
     getValues,
     setValue,
     formState: { errors },
-  } = useForm<ConInfo>({ defaultValues: formVals });
+  } = useForm<ConInfo>({ defaultValues: connection });
 
-  const dispatch = useDispatch();
+
   const onSubmit: SubmitHandler<ConInfo> = (data) => {
-    dispatch(setSearchInfo(data));
-    console.log(data, formVals, useSelector((state: RootState) => state.searchInfo));
-
-    //setSearchInfo(data);
-    // props.dispatch({
-    //   from: data.from,
-    //   to: data.to,
-    //   month: data.month,
-    //   day: data.day,
-    //   hour: data.hour,
-    //   minute: data.minute,
-    // });
+    //reduxDispatch(setSearchInfo(data));
+    //console.log(data, connection);
   };
   const SwapDestinations = () => {
     const toDestination = getValues('to');
@@ -106,6 +86,7 @@ export const SearchBar = ({
             </Grid>
             <Grid item xs={4}>
               <Button
+                type="button"
                 variant="outlined"
                 style={{ padding: '0px 10px', backgroundColor: 'white' }}
                 onClick={() => navigate('/checkout-order')}
@@ -121,6 +102,7 @@ export const SearchBar = ({
             </Grid>
             <Grid item xs={4}>
               <Button
+                type="button"
                 variant="outlined"
                 style={{ padding: '0px 10px', backgroundColor: 'white' }}
                 onClick={() => navigate('/checkout-order')}
@@ -145,21 +127,26 @@ export const SearchBar = ({
                 id="fromDestination"
                 includeInputInList
                 options={cities.map((option) => option.city)}
+                defaultValue={connection.from}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     label="From"
-                    value={from}
+                    value={connection.from}
                     className="textField"
                   />
                 )}
                 onChange={(event: any, newValue: any) => {
-                  setFrom(newValue);
+                  dispatch({
+                    ...connection,
+                    from: newValue,
+                  })
                 }}
               />
             </Grid>
             <Grid item xs={1}>
               <Button
+                type="button"
                 size="large"
                 className="swapIcon"
                 onClick={SwapDestinations}
@@ -173,16 +160,20 @@ export const SearchBar = ({
                 id="toDestination"
                 includeInputInList
                 options={cities.map((option) => option.city)}
+                defaultValue={connection.to}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     label="To"
-                    value={to}
+                    value={connection.to}
                     className="textField"
                   />
                 )}
                 onChange={(event: any, newValue: any) => {
-                  setTo(newValue);
+                  dispatch({
+                    ...connection,
+                    to: newValue,
+                  })
                 }}
               />
             </Grid>
@@ -191,8 +182,8 @@ export const SearchBar = ({
                 <Stack spacing={3}>
                   <DateTimePicker
                     label="Date&Time picker"
-                    value={date}
-                    onChange={handleChange}
+                    value={connection.date}
+                    onChange={changeDate}
                     renderInput={(params) => (
                       <TextField {...params} className="textField" />
                     )}
@@ -203,13 +194,14 @@ export const SearchBar = ({
             <Grid item xs={2.5}></Grid>
             <Grid item xs={4} style={{ padding: '16px 0px 0px 9px' }}>
               <Button
+                type="button"
                 variant="outlined"
                 className="submitbtn"
                 size="large"
-                onClick={() => {
+                onClick={(e) => {
                   navigateToInfo();
                 }}
-                disabled={!from || !to}
+                disabled={!connection.from || !connection.to}
               >
                 Search Connections
               </Button>

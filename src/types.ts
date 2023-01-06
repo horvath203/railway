@@ -1,4 +1,5 @@
 import { ThunkDispatch } from '@reduxjs/toolkit';
+import dayjs, { Dayjs } from 'dayjs';
 
 export type TrainInfo = {
   departureTime: string;
@@ -60,10 +61,7 @@ export type State = {
 export type ConInfo = {
   from: string;
   to: string;
-  month: number;
-  day: number;
-  hour: number;
-  minute: number;
+  date: Date;
 };
 
 export type Dispatch = ThunkDispatch<any, unknown, any>;

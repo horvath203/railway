@@ -15,52 +15,42 @@ import { setSearchInfo } from '../store/searchInfoReducer';
 import { useSelector, useDispatch } from 'react-redux';
 
 type SearchBarProps = {
-  //dispatch: React.Dispatch<React.SetStateAction<ConInfo>>;
+  dispatch: React.Dispatch<React.SetStateAction<ConInfo>>;
+  connection: ConInfo;
 };
 
-export const SmallSearchBar = (props: SearchBarProps) => {
-  const [date, setDate] = React.useState<Dayjs | null>(dayjs(new Date()));
+export const SmallSearchBar = ({
+  dispatch,
+  connection
+}: SearchBarProps) => {
 
   const handleChange = (newDate: Dayjs | null) => {
-    setDate(newDate);
+    if(newDate != null){
+      const data = newDate.toDate();
+        dispatch({
+          ...connection,
+          date: data,
+        });
+      }
+      console.log("date change: ", newDate?.toDate(), connection)
   };
 
   const navigate = useNavigate();
   const navigateToInfo = () => {
     navigate('/connections');
   };
-  // const DefVals = () => {
-  //   const curD = new Date();
-  //   const defVal: ConInfo = {
-  //     from: '',
-  //     to: '',
-  //     day: curD.getDate(),
-  //     month: curD.getMonth() + 1,
-  //     hour: curD.getHours(),
-  //     minute: curD.getMinutes(),
-  //   };
-  //   return defVal;
-  // };
-  const formVals = useSelector((state: RootState) => state.searchInfo);
+  // const formVals = useSelector((state: RootState) => state.searchInfo);
+  // const reduxDispatch = useDispatch();
   const {
     register,
     handleSubmit,
     getValues,
     setValue,
     formState: { errors },
-  } = useForm<ConInfo>({ defaultValues: formVals });
+  } = useForm<ConInfo>({ defaultValues: connection });
 
-  const dispatch = useDispatch();
   const onSubmit: SubmitHandler<ConInfo> = (data) => {
-    dispatch(setSearchInfo(data));
-    // props.dispatch({
-    //   from: data.from,
-    //   to: data.to,
-    //   month: data.month,
-    //   day: data.day,
-    //   hour: data.hour,
-    //   minute: data.minute,
-    // });
+    // reduxDispatch(setSearchInfo(data));
   };
   const SwapDestinations = () => {
     const tmp = getValues('to');
@@ -79,21 +69,24 @@ export const SmallSearchBar = (props: SearchBarProps) => {
             <Grid item xs={5}>
               <Autocomplete
                 freeSolo
-                id="free-solo-2-demo"
-                disableClearable
+                id="fromDestination"
+                includeInputInList
                 options={cities.map((option) => option.city)}
+                defaultValue={connection.from}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     label="From"
+                    value={connection.from}
                     className="textField"
-                    InputProps={{
-                      ...params.InputProps,
-                      type: 'search',
-                      ...register('from'),
-                    }}
                   />
                 )}
+                onChange={(event: any, newValue: any) => {
+                  dispatch({
+                    ...connection,
+                    from: newValue,
+                  });
+                }}
               />
             </Grid>
             <Grid item xs={1}>
@@ -108,21 +101,24 @@ export const SmallSearchBar = (props: SearchBarProps) => {
             <Grid item xs={5}>
               <Autocomplete
                 freeSolo
-                id="free-solo-2-demo"
-                disableClearable
+                id="toDestination"
+                includeInputInList
                 options={cities.map((option) => option.city)}
+                defaultValue={connection.to}
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     label="To"
+                    value={connection.to}
                     className="textField"
-                    InputProps={{
-                      ...params.InputProps,
-                      type: 'search',
-                      ...register('to'),
-                    }}
                   />
                 )}
+                onChange={(event: any, newValue: any) => {
+                  dispatch({
+                    ...connection,
+                    to: newValue,
+                  });
+                }}
               />
             </Grid>
             <Grid item xs={5}>
@@ -130,7 +126,7 @@ export const SmallSearchBar = (props: SearchBarProps) => {
                 <Stack spacing={3}>
                   <DateTimePicker
                     label="Date&Time picker"
-                    value={date}
+                    value={connection.date}
                     onChange={handleChange}
                     renderInput={(params) => (
                       <TextField {...params} className="textField" />
@@ -142,10 +138,14 @@ export const SmallSearchBar = (props: SearchBarProps) => {
             <Grid item xs={2.25}></Grid>
             <Grid item xs={4}>
               <Button
+                type="button"
                 variant="outlined"
                 className="submitbtn"
                 size="large"
-                onClick={navigateToInfo}
+                onClick={() => {
+                  navigateToInfo();
+                }}
+                disabled={!connection.from || !connection.to}
               >
                 Search Connections
               </Button>

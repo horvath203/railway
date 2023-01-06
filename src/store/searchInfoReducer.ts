@@ -6,10 +6,12 @@ const initialize = () => {
     const defVal: ConInfo = {
       from: '',
       to: '',
-      day: curD.getDate(),
-      month: curD.getMonth() + 1,
-      hour: curD.getHours(),
-      minute: curD.getMinutes(),
+      date: curD,
+      // day: curD.getDate(),
+      // month: curD.getMonth() + 1,
+      // year: curD.getFullYear(),
+      // hour: curD.getHours(),
+      // minute: curD.getMinutes(),
     };
     return defVal;
 }

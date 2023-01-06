@@ -21,13 +21,14 @@ type Props = {
 };
 
 export const App = ({ trains, userData, setChosenTrain }: Props) => {
-  const [connections, setConnections] = useState<ConInfo>({
-    from: '',
-    to: '',
-    month: 0,
-    day: 0,
-    hour: 0,
-    minute: 0,
+  const [connections, setConnections] = useState<ConInfo>(() => {
+    const curD = new Date();
+    const defVal: ConInfo = {
+      from: '',
+      to: '',
+      date: curD,
+    };
+    return defVal;
   });
 
   return (
@@ -40,7 +41,7 @@ export const App = ({ trains, userData, setChosenTrain }: Props) => {
             path="/railway/"
             element={
               <>
-                <SearchBar dispatch={setConnections} />
+                <SearchBar dispatch={setConnections} connection = {connections} />
                 <InformationBlock />
               </>
             }
@@ -49,6 +50,8 @@ export const App = ({ trains, userData, setChosenTrain }: Props) => {
             path="/connections"
             element={
               <TrainConnections
+                dispatch={setConnections}
+                connection = {connections}
                 trains={trains}
                 setChosenTrain={setChosenTrain}
               />
