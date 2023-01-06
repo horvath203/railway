@@ -1,0 +1,30 @@
+.MultipleUsers div {
+  background-color: aliceblue;
+}
+
+.ContainerPlace {
+  padding: 30px 20px 20px 20px;
+  margin: 0 0 30px 0;
+}
+
+.HeaderStyle {
+  width: 33%;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.ButtonPadding {
+  padding: 15px 0 0 25px;
+}
+
+.TextPadding {
+  padding: 15px 0 0 15px;
+}
+
+.BoxPadding {
+  padding: 7px 0 0 30px;
+}
+
+.TextFieldWidth {
+  width: 270px;
+}

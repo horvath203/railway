@@ -167,7 +167,7 @@ export const TrainCard = ({
               <hr />
               <span>2. trieda - {train.capacity.freePlaces2} places</span>
               <hr />
-              <span>Miest. bicykel - {train.capacity.byciclePlace} places</span>
+              <span>Miest. bicykel - {train.capacity.bicyclePlace} places</span>
             </div>
           </TabPanel>
         </AccordionDetails>

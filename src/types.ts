@@ -14,7 +14,7 @@ export type TrainInfo = {
   capacity: {
     freePlaces1: number;
     freePlaces2: number;
-    byciclePlace: number;
+    bicyclePlace: number;
   };
 };
 
@@ -22,7 +22,7 @@ export type Stop = {
   time: string;
   city: string;
 };
-export type DiscountType = 'NO DISCOUNT' | 'ISIC card';
+export type DiscountType = { 0: 'NO DISCOUNT'; 1: 'ISIC card' };
 
 export type UserData = {
   passengerInformation: PassengerInformation[];
@@ -35,7 +35,7 @@ export type PassengerInformation = {
   id: number;
   name: string;
   surname: string;
-  discount: DiscountType;
+  discount: string;
   passengerGroup: number;
   registrationNumber?: string;
 };

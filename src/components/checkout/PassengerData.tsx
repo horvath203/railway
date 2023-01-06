@@ -4,35 +4,35 @@ import Sheet from '@mui/joy/Sheet';
 import AddIcon from '@mui/icons-material/Add';
 import UserInfo from '../../containers/UserInfo';
 import { PassengerInformation } from '../../types';
+import './PassengerData.css';
 
 type Props = {
   userData: PassengerInformation[];
   userEmail: string;
   setEmail: (email: string) => void;
+  addPassenger: (passenger: PassengerInformation) => void;
 };
 
-export const PassengerData = ({ userData, userEmail, setEmail }: Props) => {
+export const PassengerData = ({
+  userData,
+  userEmail,
+  setEmail,
+  addPassenger,
+}: Props) => {
   const [email, setEm] = useState(userEmail);
-  const newPassInfo = {
+  const isMultipleUsers: boolean = userData.length > 1;
+  const newPassInfo: PassengerInformation = {
+    id: Math.max(...userData.map((user) => user.id)) + 1,
     name: '',
     surname: '',
-    discount: 'NO DISCOUNT',
-    passengerGroup: '3',
+    discount: '0',
+    passengerGroup: 3,
   };
-  console.log({ userData });
+
   return (
     <>
-      <Sheet
-        variant="outlined"
-        style={{ padding: '30px 20px 20px 20px', margin: '0px 0px 30px 0px' }}
-      >
-        <Typography
-          sx={{
-            width: '33%',
-            flexShrink: 0,
-            whiteSpace: 'nowrap',
-          }}
-        >
+      <Sheet variant="outlined" className="ContainerPlace">
+        <Typography className="HeaderStyle">
           <h3>Passenger information</h3>
         </Typography>
         <span>
@@ -40,20 +40,25 @@ export const PassengerData = ({ userData, userEmail, setEmail }: Props) => {
           The name will be directly on your travel document.
         </span>
         <br />
-        {userData.map((passenger, idx) => {
-          return <UserInfo passengerInfo={passenger} id={idx} />;
-        })}
-        {/*        onClick={() => dispatch(addPassenger())}*/}
-        <Button style={{ padding: '15px 0 0 25px' }} startIcon={<AddIcon />}>
+        <div className={`${isMultipleUsers ? 'MultipleUsers' : 'SingleUser'}`}>
+          {userData.map((passenger, idx) => {
+            return <UserInfo passengerInfo={passenger} id={idx} />;
+          })}
+        </div>
+        <Button
+          className="ButtonPadding"
+          startIcon={<AddIcon />}
+          onClick={() => addPassenger(newPassInfo)}
+        >
           Add next passenger
         </Button>
         <br />
-        <Typography style={{ padding: '15px 0 0 15px' }}>
+        <Typography className="TextPadding">
           The purchased tickets will be sent to the entered e-mail address.
         </Typography>
-        <div style={{ padding: '7px 0 0 30px' }}>
+        <div className="BoxPadding">
           <TextField
-            style={{ width: '270px' }}
+            className="TextFieldWidth"
             id="email-field"
             label="e-mail"
             variant="outlined"

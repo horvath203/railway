@@ -65,6 +65,16 @@ export const userSlice = createSlice({
         ),
       };
     },
+    // @ts-ignore
+    addPassenger: (state: UserData, action) => {
+      state.passengerInformation.push(action.payload);
+    },
+    // @ts-ignore
+    removePassenger: (state: UserData, action) => {
+      state.passengerInformation = state.passengerInformation.filter(
+        (passenger) => passenger.id !== action.payload,
+      );
+    },
   },
 });
 
@@ -75,6 +85,8 @@ export const {
   setDiscount,
   setEmail,
   setRegistrationNumber,
+  addPassenger,
+  removePassenger,
 } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,7 +1,12 @@
 .SearchContainer {
-  background-image: url('../images/subway_07.jpg');
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.6)
+    ),
+    url('../images/subway_07.jpg');
   background-size: 500px;
 }
+
 .SearchBar {
   background-color: rgba(7, 115, 215, 0.94);
   border-radius: 1em;
@@ -15,8 +20,9 @@
 }
 
 .swapIcon {
-  padding-left: 0px;
+  padding-left: 0;
 }
+
 .swapIcon svg {
   fill: #ffffff;
 }
@@ -31,48 +37,61 @@
   color: #0773d7;
   cursor: pointer;
 }
+
 .SearchBar h2:hover {
   text-decoration: underline;
 }
 
 .searchTitle {
 }
+
 .textField {
   font-size: larger !important;
   font-weight: bold !important;
   color: #0773d7 !important;
   background-color: white !important;
 }
+
 .from {
 }
+
 .swapbtn {
   justify-self: center;
   margin-top: 10px;
 }
+
 .to {
 }
+
 .fromError {
 }
+
 .toError {
 }
+
 .day {
   color: #0773d7;
   font-weight: bold;
 }
+
 .month {
   color: #0773d7;
   font-weight: bold;
 }
+
 .hour {
   color: #0773d7;
   font-weight: bold;
 }
+
 .minute {
   color: #0773d7;
   font-weight: bold;
 }
+
 .timeError {
 }
+
 .submitbtn {
   margin: 10px 0 10px 1vw;
   border-radius: 0.8em;

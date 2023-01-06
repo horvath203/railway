@@ -94,7 +94,7 @@
     "capacity": {
       "freePlaces1": 9,
       "freePlaces2": 6,
-      "byciclePlace": 5
+      "bicyclePlace": 5
     },
     "schedule": [
       {
@@ -163,7 +163,7 @@
     "capacity": {
       "freePlaces1": 9,
       "freePlaces2": 6,
-      "byciclePlace": 5
+      "bicyclePlace": 5
     },
     "schedule": [
       {
@@ -268,7 +268,7 @@
     "capacity": {
       "freePlaces1": 9,
       "freePlaces2": 6,
-      "byciclePlace": 5
+      "bicyclePlace": 5
     },
     "schedule": [
       {
@@ -341,7 +341,7 @@
     "capacity": {
       "freePlaces1": 9,
       "freePlaces2": 6,
-      "byciclePlace": 5
+      "bicyclePlace": 5
     },
     "schedule": [
       {
@@ -446,7 +446,7 @@
     "capacity": {
       "freePlaces1": 9,
       "freePlaces2": 6,
-      "byciclePlace": 5
+      "bicyclePlace": 5
     },
     "schedule": [
       {
